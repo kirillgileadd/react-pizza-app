@@ -8,6 +8,9 @@
 
     svg {
       margin-right: 8px;
+      &.rotate {
+        transform: rotate(90deg);
+      }
     }
 
     b {
