@@ -4,7 +4,7 @@ import PizzaBlock from "../components/PizzaBlock";
 
 const Home = ({items}) => {
 
-    let pizzasItems = items.map( (el, index) => <PizzaBlock key={`${el}_${index}`}/>)
+    let pizzasItems = items.map( (el, index) => <PizzaBlock key={el.id} {...el}/>)
 
     return (
         <div>
