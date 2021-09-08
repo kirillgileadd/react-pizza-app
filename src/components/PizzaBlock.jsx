@@ -1,6 +1,16 @@
-import React from 'react';
+import React, {useState} from 'react';
+import classNames from "classnames";
 
-const PizzaBlock = ({ name, imageUrl, price}) => {
+const PizzaBlock = ({name, imageUrl, price, types, sizes}) => {
+
+    const [activeType, setActiveType] = useState(types[0])
+    const [activeSize, setActiveSize] = useState(sizes[0])
+
+ console.log(types[0])
+
+    let typesName = ['тонкое', 'традиционное']
+    let sizesName = [26, 30, 40]
+
 
     return (
         <div className="pizza-block">
@@ -12,13 +22,18 @@ const PizzaBlock = ({ name, imageUrl, price}) => {
             <h4 className="pizza-block__title">{name}</h4>
             <div className="pizza-block__selector">
                 <ul>
-                    <li className="active">тонкое</li>
-                    <li>традиционное</li>
+                    {typesName.map((el, index) => <li key={el}
+                                                      className={classNames({
+                                                          active: activeType === index,
+                                                          disabled: !types.includes(index)
+                                                      })}
+                                                      onClick={() => setActiveType(index)}>{el}</li>)}
                 </ul>
                 <ul>
-                    <li className="active">26 см.</li>
-                    <li>30 см.</li>
-                    <li>40 см.</li>
+                    {sizesName.map((el, index) => <li key={el} className={classNames({
+                        active: activeSize === el,
+                        disabled: !sizes.includes(el)
+                    })} onClick={() => setActiveSize(el)}>{el} см.</li>)}
                 </ul>
             </div>
             <div className="pizza-block__bottom">
