@@ -1,26 +1,15 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect} from "react";
 import {Header} from './components/index'
 import Home from "./Pages/Home";
 import Cart from "./Pages/Cart";
 import {Route, Switch} from "react-router-dom";
 import axios from "axios";
 import {setPizzas} from "./redux/actions/pizzas";
-import {connect, useDispatch, useSelector} from "react-redux";
-
+import {useDispatch} from "react-redux";
 
 
 const App = () => {
-
     const dispatch = useDispatch()
-    const state = useSelector(({pizzas, filter}) => {
-        return {
-            items: pizzas.items,
-            sortBy: filter.sortBy
-        }
-    })
-
-    console.log(state)
-
 
     useEffect(() => {
         axios.get('http://localhost:3000/db.json').then(({data}) => {
@@ -34,8 +23,8 @@ const App = () => {
             <Header/>
             <div className="content">
                 <Switch>
-                    <Route exact path="/" render={() => <Home items={state.items}/>}/>
-                    <Route path="/cart" render={() => <Cart/>}/>
+                    <Route exact path="/" component={Home}/>
+                    <Route path="/cart" component={Cart}/>
                 </Switch>
             </div>
         </div>
@@ -44,9 +33,6 @@ const App = () => {
 
 
 export default App;
-
-
-
 
 
 // CLASS APP COMPONENT
