@@ -12,6 +12,7 @@ const PizzaBlock = ({name, imageUrl, price, types, sizes}) => {
     let sizesName = [26, 30, 40]
 
 
+
     return (
         <div className="pizza-block">
             <img
