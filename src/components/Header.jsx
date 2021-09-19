@@ -10,8 +10,8 @@ const Header = () => {
                 <Link to="/" className="header__logo">
                     <img width="38" src={logoSvg} alt="Pizza logo"/>
                     <div>
-                        <h1>React Pizza</h1>
-                        <p>самая вкусная пицца во вселенной</p>
+                        <h1>SPb Pizza</h1>
+                        <p>самая вкусная пицца в Питере</p>
                     </div>
                 </Link>
                 <Link to="/cart" className="header__cart">

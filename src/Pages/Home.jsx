@@ -3,15 +3,15 @@ import {Categories, SortPopup} from "../components";
 import PizzaBlock from "../components/PizzaBlock/PizzaBlock";
 import {useDispatch, useSelector} from "react-redux";
 import {setCategory, setSortBy} from "../redux/actions/filters";
-import {fetchPizzas} from "../redux/actions/pizzas";
+import {fetchPizzas, isPizzas, setNoPizzas} from "../redux/actions/pizzas";
 import LoadingBlock from "../components/PizzaBlock/LoadingBlock";
 
 
-const categoryNames = ['Мясные', 'Вегетарианская', 'Гриль', 'Острые', 'Закрытые']
+const categoryNames = ['Мясные', 'Вегетарианские', 'Гриль', 'Острые', 'Закрытые', 'Детские']
 const sortItems = [
-    {name: 'популярности', type: "rating",  order: 'desc'},
-    {name: 'цене', type: "price",  order: 'desc'},
-    {name: 'алфовиту', type: 'name', order: 'asc' },]
+    {name: 'популярности', type: "rating", order: 'desc'},
+    {name: 'цене', type: "price", order: 'desc'},
+    {name: 'алфовиту', type: 'name', order: 'asc'},]
 
 const Home = () => {
 
@@ -25,7 +25,7 @@ const Home = () => {
         dispatch(setCategory(index))
     }, [])
 
-    const onSelectActiveType = useCallback( (index) => {
+    const onSelectActiveType = useCallback((index) => {
         dispatch(setSortBy(index))
     }, [])
 
@@ -34,25 +34,25 @@ const Home = () => {
     }, [category, sortBy])
 
 
-    let pizzasItems = isLoaded
-        ? items.map((el, index) => <PizzaBlock key={el.id} {...el}/>)
-        : Array(10).fill(0).map((_, index) => <LoadingBlock key={index}/>)
-
+    let pizzasItems = isLoaded ? items.map((el, index) => <PizzaBlock key={el.id} {...el}/>) :
+        Array(10).fill(0).map((_, index) => <LoadingBlock>{_}</LoadingBlock>)
 
     return (
         <div>
             <div className="container">
-                <div className="content__top">
-                    <Categories items={categoryNames}
-                                onClickCategory={onSelectCategory}
-                                activeCategory={category}/>
-                    <SortPopup items={sortItems}
-                               onClickType={onSelectActiveType}
-                               activeSortType={sortBy.type}/>
+                <div className='content__top-box'>
+                    <div className="content__top">
+                        <Categories items={categoryNames}
+                                    onClickCategory={onSelectCategory}
+                                    activeCategory={category}/>
+                        <SortPopup items={sortItems}
+                                   onClickType={onSelectActiveType}
+                                   activeSortType={sortBy.type}/>
+                    </div>
                 </div>
-                <h2 className="content__title">Все пиццы</h2>
+                <h2 className="content__title">Пиццы</h2>
                 <div className="content__items">
-                    {pizzasItems}
+                    {pizzasItems.length === 0 ? (<div>Закончились</div>) : pizzasItems}
                 </div>
             </div>
         </div>

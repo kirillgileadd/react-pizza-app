@@ -36,6 +36,9 @@ body {
     align-items: center;
     justify-content: space-between;
   }
+  &__top-box {
+    position: sticky;
+  }
 }
 
 .container {
@@ -310,4 +313,18 @@ body {
       font-size: 18px;
     }
   }
+}
+
+
+.error {
+  padding: 300px;
+  display: flex;
+  text-align: center;
+  margin: 0 auto;
+  font-family: 'Proxima Nova', Roboto, system-ui, Tahoma, sans-serif;
+  font-weight: 600;
+  font-size: 36px;
+  line-height: 30px;
+  opacity: 0.5;
+
 }
