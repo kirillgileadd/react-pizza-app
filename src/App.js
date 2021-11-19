@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React from "react";
 import {Header} from './components/index'
 import Home from "./Pages/Home";
 import Cart from "./Pages/Cart";

@@ -1,17 +1,30 @@
 import React, {useState} from 'react';
 import classNames from "classnames";
 import * as PropType from "prop-types";
+import {Button} from "../index";
 
-const PizzaBlock = ({name, imageUrl, price, types, sizes}) => {
+const PizzaBlock = ({id, name, imageUrl, price, types, sizes, onClickAddPizza, pizzasQuantity}) => {
 
     const [activeType, setActiveType] = useState(types[0])
     const [activeSize, setActiveSize] = useState(sizes[0])
 
-
     let typesName = ['тонкое', 'традиционное']
     let sizesName = [26, 30, 40]
 
+    const onAddPizza = () => {
+        const obj = {
+            id,
+            name,
+            imageUrl,
+            price,
+            type: typesName[activeType],
+            typeIndex: activeType,
+            size: activeSize,
+            sizeIndex: sizesName.indexOf(activeSize)
 
+        }
+        onClickAddPizza(obj)
+    }
 
     return (
         <div className="pizza-block">
@@ -39,7 +52,7 @@ const PizzaBlock = ({name, imageUrl, price, types, sizes}) => {
             </div>
             <div className="pizza-block__bottom">
                 <div className="pizza-block__price">от {price} ₽</div>
-                <div className="button button--outline button--add">
+                <Button className="button--add" outline onClick={onAddPizza}>
                     <svg
                         width="12"
                         height="12"
@@ -53,8 +66,12 @@ const PizzaBlock = ({name, imageUrl, price, types, sizes}) => {
                         />
                     </svg>
                     <span>Добавить</span>
-                    <i>2</i>
-                </div>
+                    {
+                        pizzasQuantity && (
+                            <i>{pizzasQuantity}</i>
+                        )
+                    }
+                </Button>
             </div>
         </div>
     );

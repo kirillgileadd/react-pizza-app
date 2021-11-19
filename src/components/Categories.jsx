@@ -3,15 +3,13 @@ import * as PropType from "prop-types";
 
 
 const Categories = memo(({items, onClickCategory, activeCategory}) => {
-
-
-
     let itemList = items &&
-        items
-            .map((el, index) => <li
+        items.map((el, index) =>
+            <li
                 className={activeCategory === index ? 'active' : ''}
                 onClick={() => onClickCategory(index)}
-                key={`${el}_${index}`}>{el}</li>)
+                key={`${el}_${index}`}>{el}
+            </li>)
 
     return (
         <div className="categories">

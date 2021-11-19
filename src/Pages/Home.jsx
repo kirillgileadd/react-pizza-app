@@ -3,8 +3,9 @@ import {Categories, SortPopup} from "../components";
 import PizzaBlock from "../components/PizzaBlock/PizzaBlock";
 import {useDispatch, useSelector} from "react-redux";
 import {setCategory, setSortBy} from "../redux/actions/filters";
-import {fetchPizzas, isPizzas, setNoPizzas} from "../redux/actions/pizzas";
+import {fetchPizzas} from "../redux/actions/pizzas";
 import LoadingBlock from "../components/PizzaBlock/LoadingBlock";
+import {addPizzaToCart} from "../redux/actions/cart";
 
 
 const categoryNames = ['Мясные', 'Вегетарианские', 'Гриль', 'Острые', 'Закрытые', 'Детские']
@@ -19,23 +20,31 @@ const Home = () => {
     const items = useSelector(({pizzas}) => pizzas.items)
     const isLoaded = useSelector(({pizzas}) => pizzas.isLoaded)
     const {category, sortBy} = useSelector(({filter}) => filter)
+    const pizzasQuantity = useSelector(({cart}) => cart.items)
 
 
     const onSelectCategory = useCallback((index) => {
         dispatch(setCategory(index))
-    }, [])
+    }, [dispatch])
 
     const onSelectActiveType = useCallback((index) => {
         dispatch(setSortBy(index))
-    }, [])
+    }, [dispatch])
+
+    const handleAddPizzaToCart = (obj) => {
+        dispatch(addPizzaToCart(obj))
+    }
 
     useEffect(() => {
         dispatch(fetchPizzas(sortBy, category))
-    }, [category, sortBy])
+    }, [dispatch, category, sortBy])
 
 
-    let pizzasItems = isLoaded ? items.map((el, index) => <PizzaBlock key={el.id} {...el}/>) :
-        Array(10).fill(0).map((_, index) => <LoadingBlock>{_}</LoadingBlock>)
+    let pizzasItems = isLoaded ? items.map((el, index) => <PizzaBlock
+            onClickAddPizza={handleAddPizzaToCart}
+            pizzasQuantity={pizzasQuantity[el.id] && pizzasQuantity[el.id].length}
+            key={el.id} {...el} />) :
+        Array(4).fill(0).map((_, index) => <LoadingBlock key={index}>{_}</LoadingBlock>)
 
     return (
         <div>
@@ -52,7 +61,7 @@ const Home = () => {
                 </div>
                 <h2 className="content__title">Пиццы</h2>
                 <div className="content__items">
-                    {pizzasItems.length === 0 ? (<div>Закончились</div>) : pizzasItems}
+                    {!pizzasItems.length ? (<div className="noPizzas">Закончились :(</div>) : pizzasItems}
                 </div>
             </div>
         </div>
