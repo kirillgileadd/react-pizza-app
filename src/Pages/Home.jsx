@@ -42,7 +42,7 @@ const Home = () => {
 
     let pizzasItems = isLoaded ? items.map((el, index) => <PizzaBlock
             onClickAddPizza={handleAddPizzaToCart}
-            pizzasQuantity={pizzasQuantity[el.id] && pizzasQuantity[el.id].length}
+            pizzasQuantity={pizzasQuantity[el.id] && pizzasQuantity[el.id].items.length}
             key={el.id} {...el} />) :
         Array(4).fill(0).map((_, index) => <LoadingBlock key={index}>{_}</LoadingBlock>)
 

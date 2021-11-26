@@ -20,7 +20,7 @@ const PizzaBlock = ({id, name, imageUrl, price, types, sizes, onClickAddPizza, p
             type: typesName[activeType],
             typeIndex: activeType,
             size: activeSize,
-            sizeIndex: sizesName.indexOf(activeSize)
+            sizeIndex: sizesName.indexOf(activeSize),
 
         }
         onClickAddPizza(obj)
