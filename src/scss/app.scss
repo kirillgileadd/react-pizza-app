@@ -318,7 +318,7 @@ body {
 
 
 .noPizzas {
-  padding: 300px;
+  padding: 10%;
   display: flex;
   text-align: center;
   margin: 0 auto;
@@ -331,6 +331,9 @@ body {
 }
 
 @media (max-width: 773px) {
+  .noPizzas {
+    font-size: 24px;
+  }
   .pizza-block__image {
     width: 300px !important;
     height: 300px !important;
