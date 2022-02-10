@@ -7,6 +7,7 @@
 body {
   background-color: $background;
   padding: 50px 0;
+  overflow-x: hidden;
 }
 
 .wrapper {
@@ -327,4 +328,35 @@ body {
   line-height: 30px;
   opacity: 0.5;
 
+}
+
+@media (max-width: 773px) {
+  .pizza-block__image {
+    width: 300px !important;
+    height: 300px !important;
+  }
+  .cart__item {
+    position: relative;
+    flex-direction: column;
+    &-img {
+      display: flex;
+      justify-content: center;
+      width: 100%;
+    }
+    &-remove {
+      right: 0px ;
+      top: 0px ;
+      position: absolute;
+    }
+    &-count {
+      margin: 15px 0;
+      b {
+        margin: 0px 15px;
+      }
+    }
+    &-price {
+      display: flex;
+      justify-content: flex-start;
+    }
+  }
 }

@@ -4,7 +4,7 @@
   border-bottom: 1px solid $gray-line;
   padding: 40px 0;
 
-  .container {
+  .header__container {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -28,5 +28,21 @@
     p {
       color: #7b7b7b;
     }
+  }
+}
+
+
+@media(max-width: 773px) {
+  body{
+    padding: 10px 0 !important;
+  }
+  .wrapper {
+    width: calc(100vw - 30px) !important;
+  }
+  .header__container {
+    flex-direction: column;
+  }
+  .header__logo {
+    margin-bottom: 26px;
   }
 }

@@ -4,6 +4,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {clearCartAction, minusCartItem, plusCartItem, removeCartItem} from "../redux/actions/cart";
 import Empty from "./Empty";
 import {Link, useHistory} from "react-router-dom";
+import {Button} from "../components";
 
 const Cart = () => {
     const dispatch = useDispatch()
@@ -100,19 +101,19 @@ const Cart = () => {
                                     <span> Сумма заказа: <b>{totalPrice} ₽</b> </span>
                                 </div>
                                 <div className="cart__bottom-buttons">
-                                    <a href="/" className="button button--outline button--add go-back-btn">
+                                    <Button onClick={() => history.goBack()}  className="button button--outline button--add go-back-btn">
                                         <svg width="8" height="14" viewBox="0 0 8 14" fill="none"
                                              xmlns="http://www.w3.org/2000/svg">
                                             <path d="M7 13L1 6.93015L6.86175 1" stroke="#D3D3D3" strokeWidth="1.5"
                                                   strokeLinecap="round" strokeLinejoin="round"/>
                                         </svg>
-                                        <Link onClick={() => history.goBack()}>
+
                                             <span>Вернуться назад</span>
-                                        </Link>
-                                    </a>
-                                    <div className="button pay-btn">
+
+                                    </Button>
+                                    <Button onClick={onClickOrder} className="button pay-btn">
                                         <span>Оплатить сейчас</span>
-                                    </div>
+                                    </Button>
                                 </div>
                             </div>
                         </div>

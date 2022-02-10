@@ -70,3 +70,9 @@
     letter-spacing: 0.015em;
   }
 }
+
+@media(max-width: 773px) {
+  .pizza-block {
+    width: 100%;
+  }
+}
