@@ -1,7 +1,7 @@
 import React from 'react';
 import CartItem from "../components/CartItem";
 import {useDispatch, useSelector} from "react-redux";
-import {clearCartAction} from "../redux/actions/cart";
+import {clearCartAction, removeCartItem} from "../redux/actions/cart";
 import Empty from "./Empty";
 
 const Cart = () => {
@@ -11,6 +11,12 @@ const Cart = () => {
     const addPizzas = Object.keys(items).map(key => {
         return items[key].items[0]
     })
+
+    const onRemoveItem = (id) => {
+        if(window.confirm('Вы действительно хотите удалить пиццу?')) {
+            dispatch(removeCartItem(id))
+        }
+    }
 
     const clearCart = () => {
         if (window.confirm('Вы действительно хотите очистить корзину? ')) {
@@ -25,7 +31,7 @@ const Cart = () => {
         <div className="content">
             <div className="container container--cart">
                 {
-                    totalCount > 1 ? (
+                    totalCount > 0 ? (
                         <div className="cart">
                             <div className="cart__top">
                                 <h2 className="content__title">
@@ -62,7 +68,7 @@ const Cart = () => {
                             </div>
                             <div className="content__items">
                                 {
-                                    addPizzas.map((obj) => <CartItem key={obj.id} name={obj.name} type={obj.type} size={obj.size} totalPrice={items[obj.id].totalPrice} totalCount={items[obj.id].items.length}/>)
+                                    addPizzas.map((obj) => <CartItem key={obj.id} onRemoveItem={onRemoveItem} id={obj.id} name={obj.name} type={obj.type} size={obj.size} totalPrice={items[obj.id].totalPrice} totalCount={items[obj.id].items.length}/>)
                                 }
                             </div>
                             <div className="cart__bottom">

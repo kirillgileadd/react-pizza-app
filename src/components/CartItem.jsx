@@ -1,6 +1,13 @@
 import React from 'react';
+import Button from "./Button";
 
-const CartItem = ({name, type, size, totalPrice, totalCount}) => {
+const CartItem = ({name, type, size, totalPrice, totalCount, id, onRemoveItem}) => {
+    console.log(id)
+    const handleOnClick = () => {
+
+        onRemoveItem(id)
+    }
+
     return (
         <div className="cart__item">
             <div className="cart__item-img">
@@ -28,7 +35,7 @@ const CartItem = ({name, type, size, totalPrice, totalCount}) => {
 
                 </div>
                 <b>{totalCount}</b>
-                <div className="button button--outline button--circle cart__item-count-plus">
+                <Button className="button button--outline button--circle cart__item-count-plus">
                     <svg width="10" height="10" viewBox="0 0 10 10" fill="none"
                          xmlns="http://www.w3.org/2000/svg">
                         <path
@@ -39,13 +46,13 @@ const CartItem = ({name, type, size, totalPrice, totalCount}) => {
                             fill="#EB5A1E"/>
                     </svg>
 
-                </div>
+                </Button>
             </div>
             <div className="cart__item-price">
                 <b>{totalPrice} ₽</b>
             </div>
             <div className="cart__item-remove">
-                <div className="button button--outline button--circle">
+                <Button onClick={handleOnClick}  className="button button--outline button--circle">
                     <svg width="10" height="10" viewBox="0 0 10 10" fill="none"
                          xmlns="http://www.w3.org/2000/svg">
                         <path
@@ -56,7 +63,7 @@ const CartItem = ({name, type, size, totalPrice, totalCount}) => {
                             fill="#EB5A1E"/>
                     </svg>
 
-                </div>
+                </Button>
             </div>
         </div>
     );

@@ -4,20 +4,20 @@ import CartEmptyImg from '../assets/img/empty-cart.png';
 
 const Empty = () => {
     return (
-        <React.Fragment>
+        <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center'}}>
             <h2>
                 Корзина пустая
             </h2>
-            <p>
+            <p style={{marginBottom: '26px'}}>
                 Вероятней всего, вы не заказывали ещё пиццу.
                 <br />
                 Для того, чтобы заказать пиццу, перейди на главную страницу.
             </p>
-            <img src={CartEmptyImg} alt="Empty cart" />
+            <img src={CartEmptyImg} alt="Empty cart" style={{width: '60%', marginBottom: '26px'}}/>
             <Link to="/" className="button button--black">
                 <span>Вернуться назад</span>
             </Link>
-        </React.Fragment>
+        </div>
     );
 };
 

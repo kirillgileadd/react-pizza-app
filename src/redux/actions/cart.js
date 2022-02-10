@@ -8,3 +8,8 @@ export const addPizzaToCart = (pizzaOBj) => ({
 export const clearCartAction = () => ({
   type: "CLEAR_CART"
 })
+
+export const removeCartItem = (id) => ({
+  type: "REMOVE_CART_ITEM",
+  payload: id
+})
