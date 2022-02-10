@@ -1,10 +1,9 @@
 import React from 'react';
 import Button from "./Button";
 
-const CartItem = ({name, type, size, totalPrice, totalCount, id, onRemoveItem}) => {
+const CartItem = ({name, type, size, totalPrice, totalCount, id, onRemoveItem, onPlusItem, onMinusItem, onClickOrder}) => {
     console.log(id)
     const handleOnClick = () => {
-
         onRemoveItem(id)
     }
 
@@ -22,7 +21,7 @@ const CartItem = ({name, type, size, totalPrice, totalCount, id, onRemoveItem}) 
                 <p>{type} тесто, {size} см.</p>
             </div>
             <div className="cart__item-count">
-                <div className="button button--outline button--circle cart__item-count-minus">
+                <Button onClick={() => onMinusItem(id)} className="button button--outline button--circle cart__item-count-minus">
                     <svg width="10" height="10" viewBox="0 0 10 10" fill="none"
                          xmlns="http://www.w3.org/2000/svg">
                         <path
@@ -33,9 +32,9 @@ const CartItem = ({name, type, size, totalPrice, totalCount, id, onRemoveItem}) 
                             fill="#EB5A1E"/>
                     </svg>
 
-                </div>
+                </Button>
                 <b>{totalCount}</b>
-                <Button className="button button--outline button--circle cart__item-count-plus">
+                <Button onClick={() => onPlusItem(id)} className="button button--outline button--circle cart__item-count-plus">
                     <svg width="10" height="10" viewBox="0 0 10 10" fill="none"
                          xmlns="http://www.w3.org/2000/svg">
                         <path

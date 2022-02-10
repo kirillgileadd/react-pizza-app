@@ -1,11 +1,13 @@
 import React from 'react';
 import CartItem from "../components/CartItem";
 import {useDispatch, useSelector} from "react-redux";
-import {clearCartAction, removeCartItem} from "../redux/actions/cart";
+import {clearCartAction, minusCartItem, plusCartItem, removeCartItem} from "../redux/actions/cart";
 import Empty from "./Empty";
+import {Link, useHistory} from "react-router-dom";
 
 const Cart = () => {
     const dispatch = useDispatch()
+    let history = useHistory();
     const {items, totalPrice, totalCount} = useSelector(({cart}) => cart)
 
     const addPizzas = Object.keys(items).map(key => {
@@ -24,7 +26,19 @@ const Cart = () => {
         }
     }
 
-    console.log(addPizzas)
+
+    const onPlusItem = (id) => {
+        dispatch(plusCartItem(id));
+    };
+
+    const onMinusItem = (id) => {
+        dispatch(minusCartItem(id));
+    };
+
+    const onClickOrder = () => {
+        console.log('ВАШ ЗАКАЗ', items);
+    };
+
 
     return (
 
@@ -68,7 +82,16 @@ const Cart = () => {
                             </div>
                             <div className="content__items">
                                 {
-                                    addPizzas.map((obj) => <CartItem key={obj.id} onRemoveItem={onRemoveItem} id={obj.id} name={obj.name} type={obj.type} size={obj.size} totalPrice={items[obj.id].totalPrice} totalCount={items[obj.id].items.length}/>)
+                                    addPizzas.map((obj) => <CartItem key={obj.id}
+                                                                     onRemoveItem={onRemoveItem}
+                                                                     onPlusItem={onPlusItem}
+                                                                     onMinusItem={onMinusItem}
+                                                                     onClickOrder={onClickOrder}
+                                                                     id={obj.id} name={obj.name}
+                                                                     type={obj.type}
+                                                                     size={obj.size}
+                                                                     totalPrice={items[obj.id].totalPrice}
+                                                                     totalCount={items[obj.id].items.length}/>)
                                 }
                             </div>
                             <div className="cart__bottom">
@@ -83,8 +106,9 @@ const Cart = () => {
                                             <path d="M7 13L1 6.93015L6.86175 1" stroke="#D3D3D3" strokeWidth="1.5"
                                                   strokeLinecap="round" strokeLinejoin="round"/>
                                         </svg>
-
-                                        <span>Вернуться назад</span>
+                                        <Link onClick={() => history.goBack()}>
+                                            <span>Вернуться назад</span>
+                                        </Link>
                                     </a>
                                     <div className="button pay-btn">
                                         <span>Оплатить сейчас</span>
